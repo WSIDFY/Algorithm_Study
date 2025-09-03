@@ -1,22 +1,16 @@
-# 현재 풀이중입니다.
-
-
-
 from random import *
 
-time = list(range(5,51))      # 5에서 50까지의 리스트 생성
-client = [50]             # 고객수 50명 설정
-num = 1                 # 고객 카운트 변수
+client = range(1,51)    # 총 50명의 승객 리스트 생성
+total = 0               # 총 탑승인원을 구하는 변수
 
-random_time = shuffle(time)     # 5~50 리스트 무작위로 섞기
+for i in client:        # 탑승객 만큼 반복하는 반복문
+    time = randrange(5,51)  #5분~50분 사이의 난수를 생성하는 time변수
 
-for i in client:       # 고객 수 만큼 반복
+    if 5 <= time <= 15:   # 조건에 맞는 탑승객일 때
+        print('[0] {0}번째 손님 (소요시간 : {1}분)'.format(i, time))
+        total += 1    # 총 탑승인원 +1
 
-    if 5 <= random_time[i] <= 15:
-        print('[0] {0}번째 손님 (소요시간 : {1}분)'.format(num, random_time[i]))
-        num += 1
+    else:       # 조건에 맞지 않는 탑승객일 때
+        print('[ ] {0}번째 손님 (소요시간 : {1}분)'.format(i, time))
 
-    else:
-        print('[ ] {0}번째 손님 (소요시간 : {1}분)'.format(num, random_time[i]))
-        num += 1
-
+print('총 탑승객 : {}명'.format(total))
