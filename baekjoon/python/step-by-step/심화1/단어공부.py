@@ -3,29 +3,30 @@
 - 입력받은 문자의 각 자리별로 dict에서 키값 매칭시키고 값 증가
 - 마지막에 dict에서 값이 제일 큰 키값을 출력(두 개 이상이면 구분 및 '?'출력)
 '''
-
+# 사전은 인덱스로 접근 불가!
 alphabets = {'A':0, 'B':0, 'C':0, 'D':0, 'E':0, 'F':0, 'G':0,'H':0,'I':0,'J':0,'K':0,'L':0,'M':0,'N':0,'O':0,'P':0,'Q':0,'R':0,'S':0,'T':0,'U':0,'V':0,'W':0,'X':0,'Y':0,'Z':0}
-word = input().upper()
+word = input().upper()      # 입력받은 값을 대문자로 변환
 
-for i in range(len(word)):
+max_value = 0
+
+for i in range(len(word)):      # 입력받은 단어의 길이만큼 반복
     
     key = word[i]
-    alphabets[key] += 1
+    alphabets[key] += 1         # 등장한 key값의 value에 +1연산 수행
 
-Prosecutor_list = []
-Prosecutor_list.append(max(alphabets, key=alphabets.get)) # 최대의 value를 가진 key값 모두 리스트에 추가
-# 최대 value값(정수)를 구하고 저장
-max_value = alphabets[Prosecutor_list[0]]
-# 최대 value와 동일한 key값을 탐색
-for j in range(len(alphabets)):
-# 그 key값의 개수가 2개 이상이면 '?'출력
+    # 최대 value값 > max_value에 저장
+    if max_value < alphabets[key]:
+        max_value = alphabets[key]
 
-if len(len(Prosecutor_list)) > 1:
+max_list = []       # 최대 value값을 가진 key값들을 저장할 리스트
+
+# 최대 value값과 동일한 value값을 가진 key값을 max_list 리스트에 추가하는 반복문
+for key, value in alphabets.items():
+    if value == max_value:
+        max_list.append(key)
+
+# 만약 max_list의 길이가 2이상이라면(=최대 value값을 가진 key값이 두 개 이상이라면)
+if len(max_list) > 1:
     print('?')
 else:
-    print(Prosecutor_list[0])
-
-# key=alphabets.get 란? ->  
-# 두 개 이상일 때를 어떻게 구분하지?
-
-# 현재 풀이 중입니다...
+    print(max_list[0])
