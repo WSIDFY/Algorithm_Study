@@ -1,18 +1,28 @@
-croatia = ['c=', 'c-','dz=', 'd-', 'lj', 'nj', 's=', 'z=']  # 크로아티아 문자 저장
+croatia = ['c=', 'c-','dz=', 'd-', 'lj', 'nj', 's=', 'z=']  # 크로아티아 문자 저장(리스트)
+input_string = input()       # 입력받을 문자열
 
-input_string = str(input())       # 입력받을 문자열
-store = []      # 식별된 크로아티아 문자 저장 리스트
+for i in croatia:           # 입력된 문자열 만큼 반복
+    if input_string.find(i) >= 0:              # 입력된 문자열에서 발견된다면
+        input_string = input_string.replace(i,'*')    # 발견된 문자열을 *로 바꾸고
 
-for i in range(0,len(croatia)):
-    if input_string.find(croatia[i]) >= 0:  # find는 값이 있으면 해당 값의 index값 리턴(없으면 -1리턴)
-        store.append(croatia[i])
-        input_string.remove(croatia[i])      # 문자열은 제거 불가라 수정 필요
+print(len(input_string))                       # 크로아티아 문자는 *하나로 바뀐 입력받았던 문자열 카운트
 
+'''
+기초 문법에 대한 이해가 부족해서 많은 삽질을 했었던 문제..
 
-print(store)
-print(input_string)
-        
-print(len(store) + len(input_string))
+- find()함수는 찾고자 하는 것을 찾았을 때 해당 값의 인덱스 값을 반환한다
+  (찾고자 하는 값이 2자리 이상의 문자열이라면 해당 문자열의 첫 번째 인덱스 반환)
+  
+- replace()함수는 반환을 해도 기존의 값은 변하지 않고 일시적으로만 변함
+  (바꾸려면 input_string = input_string.replace(i,'*') 이런 식으로 초기화 필요)
 
+기존에는 크로아티아 문자열을 찾고 이를 새로운 리스트에 집어넣고 기존 문자열에서 remove한 뒤에 다시 비교하려고했었다.
+>>> 리스트에는 remove()가 존재하지만 문자열에서는 해당 메서드가 존재X 즉, 로직 자체가 틀림 
 
-# 현재 풀이 중...
+기존에는 count+=1 혹은 식별된 크로아티아 문자를 따로 저장한 리스트의 원소 길이를 카운트 하려고 했었다
+**>>> 결국 입력받은 값에서 사전에 정의된 크로아티아 문자를 '*'하나로 치환하면 전체 길이가 크로아티아 문자 개수였다...**
+
+- for i in croatia: > 이게 되는 줄 모르고 range()만으로 복잡하게 짰다가 현타가 씨게 왔습니다.
+-
+
+'''
