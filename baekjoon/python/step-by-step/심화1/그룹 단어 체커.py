@@ -19,33 +19,39 @@
 
 4. value 출력
 
-풀이 중...
 '''
 
 count = int(input())
 
-group_check_list = [0]
 value = 0
 
 for i in range(count):
+    group_check_list = [0]      # 문자열 입력받기 전에는 문자를 저장할 리스트를 초기화
     text = str(input())
     
     for j in range(len(text)):
 
         # 문자가 직전 값과 같지 않고, 리스트에 저장되어 있지 않다면
-        if group_check_list[-1] != text[j] and group_check_list.find(text[j]) == -1:    
-            group_check_list.append(text[i])        # 문자를 리스트에 추가
+        if group_check_list[-1] != text[j] and text[j] not in group_check_list:    
+            group_check_list.append(text[j])        # 문자를 리스트에 추가
 
         # 문자가 직전값과 같고, 리스트에 저장되어 있는 값이라면
-        elif group_check_list[-1] == text[j] and group_check_list.find(text[j]) > -1:
+        elif group_check_list[-1] == text[j] and text[j] in group_check_list:
             continue    # 무시하고 진행
-
+            
         # 문자가 직전값과 같지 않고, 리스트에 저장되어 있는 값이라면(그룹단어X)
-        elif group_check_list[-1] != text[j] and group_check_list.find(text[j]) > -1:
-            group_check_list = group_check_list.clear()
+        elif group_check_list[-1] != text[j] and text[j] in group_check_list:
+            group_check_list = [0]  # 리스트 초기화
             break       # 해당 문자열은 건너뛰기
     
-    if len(group_check_list) > 0:
+    if len(group_check_list) >= 2:
         value += 1
     
 print(value)
+
+
+'''
+- clear()로 처리하면 None이 되기 때문에 추후에 리스트 사용시 에러가 나기 때문에 [0]으로 초기화 해줄 것
+- 리스트는 find() 메서드 없음!! (in, not in 사용해야 함)
+- 매 단어마다 리스트를 초기화 해줘야 한다는 사실 명심하기.
+'''
