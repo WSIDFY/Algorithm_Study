@@ -1,5 +1,4 @@
 '''
-
 1. 행렬의 크기를 입력받기(N, M)
 2. input_list[], first_list[] 만들기
 3. input_list[]에 사용자로부터 입력 받을 M개의 원소를 정수형으로 추가 +
@@ -46,4 +45,24 @@ for f in range(0, N):
 (참고사항)
 - 파이썬 배열 만드는 방법
 - 리스트의 공백단위 정수 출력
+'''
+
+'''
+너무 복잡하게 한 자리씩 입력받도록만 생각해서 시간이 오래 걸리는 풀이인 것 같다.
+인터넷에 훨씬 단축해서 풀이된 내용이 있어서 추가로 기재해두겠습니다.
+
+N, M = map(int, input().split())
+
+for row in range(N):
+    a = list(map(int, input().split()))
+    A.append(a)
+    
+for row in range(N):
+    b = list(map(int, input().split()))
+    B.append(b)
+    
+for i in range(N):
+    for j in range(M):
+        print(A[i][j] + B[i][j], end = " ")
+    print()
 '''
